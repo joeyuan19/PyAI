@@ -1,11 +1,25 @@
 import random
+from pyAI import *
 
 class IllegalMoveError(Exception):
     pass
 
+class TicTacToeBoard(Board):
+    def __init__(self):
+        self.board = [0]*9
+    
+    def __getitem__(self,key):
+        return self.board[key]
+    
+    def __setitem__(self,key,value):
+        self.board[key] = value
+    
+    def __str__(self):
+        return '\n'.join(' '.join(str(self.board[n*3+i]) for i in range(3)) for n in range(3))
+    
 class TicTacToe(object):
     def __init__(self,player_1,player_2):
-        self.board     = [0]*9
+        self.board     = TicTacToeBoard()
         self.p1        = player_1
         self.p1.set_player(1)
         self.p2        = player_2
